@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import FriendList from "./components/friend-list/FriendList";
+import "./App.css";
+import FormSplitBill from "./components/form-split-bill/FormSplitBill";
+import { useState } from "react";
+
+import { initialFriends } from "./data";
 
 function App() {
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [friend, setFriend] = useState(initialFriends);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <div className="sidebar">
+        <FriendList
+          onSelect={setSelectedItem}
+          selectedItem={selectedItem}
+          friend={friend}
+          setFriend={setFriend}
+        />
+      </div>
+      <div>{selectedItem && <FormSplitBill selectedItem={selectedItem} />}</div>
     </div>
   );
 }
