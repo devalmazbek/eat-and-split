@@ -1,9 +1,12 @@
 function FriendListItem({ item, onSelect, selectedItem }) {
   const handleSelect = () => {
-    onSelect(item);
+    onSelect((currentItem) => (currentItem?.id === item.id ? null : item));
   };
+
+  const isSelected = item?.id === selectedItem?.id;
+
   return (
-    <li>
+    <li className={isSelected ? "selected" : ""}>
       <img src={item.image} alt="friend" />
       <h3>{item.name}</h3>
       {item.balance < 0 && (
@@ -16,7 +19,7 @@ function FriendListItem({ item, onSelect, selectedItem }) {
       )}
       {item.balance === 0 && <p>You and {item.name} are even</p>}
       <button className="button" onClick={handleSelect}>
-        Select
+        {isSelected ? "Close" : "Select"}
       </button>
     </li>
   );
