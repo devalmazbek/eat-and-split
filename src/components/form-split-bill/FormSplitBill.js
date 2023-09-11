@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function FormSplitBill({ selectedItem }) {
+function FormSplitBill({ selectedItem, onSplitBill }) {
   const [bill, setBill] = useState("");
   const [paidByUser, setPaidByUser] = useState("");
   const [user, setUser] = useState("user");
@@ -9,10 +9,8 @@ function FormSplitBill({ selectedItem }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log({
-      ...selectedItem,
-      balance: selectedItem.balance + paidByFriend,
-    });
+    if (!bill || !paidByUser) return;
+    onSplitBill(user === "user" ? paidByFriend : -paidByFriend);
   };
 
   return (

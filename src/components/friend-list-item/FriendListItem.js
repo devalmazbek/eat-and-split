@@ -14,7 +14,7 @@ function FriendListItem({ item, onSelect, selectedItem }) {
       )}
       {item.balance > 0 && (
         <p className="green">
-          {item.name} owes you {item.balance}
+          {item.name} owes you {Math.abs(item.balance)}
         </p>
       )}
       {item.balance === 0 && <p>You and {item.name} are even</p>}
